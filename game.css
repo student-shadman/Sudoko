@@ -1,0 +1,163 @@
+:root {
+  --primary: #6c5ce7;
+  --secondary: #ffeaa7;
+  --highlight: #fd79a8;
+  --bg-light: #f1f2f6;
+  --bg-dark: #2d3436;
+  --text-light: #2d3436;
+  --text-dark: #f1f2f6;
+  --correct: #55efc4;
+  --incorrect: #ff7675;
+  --hint: #fab1a0;
+  --input-bg: #fff;
+  --disabled-bg: #dfe6e9;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.sudoku-app {
+  max-width: 540px;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary);
+  user-select: none;
+}
+
+header, footer {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 2px;
+  background: var(--primary);
+  border-radius: 8px;
+  border: 3px solid var(--primary);
+  user-select: none;
+}
+
+.cell {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background: var(--input-bg);
+  border: 1px solid #b2bec3;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 1;
+  transition: background-color 0.3s ease;
+  cursor: text;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.cell input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  outline: none;
+  user-select: text;
+  caret-color: var(--primary);
+}
+
+.cell input:disabled {
+  background-color: var(--disabled-bg);
+  color: #636e72;
+  cursor: default;
+}
+
+.cell.correct {
+  background-color: var(--correct);
+  color: var(--text-dark);
+  transition: background-color 0.5s ease;
+}
+
+.cell.incorrect {
+  background-color: var(--incorrect);
+  color: var(--text-dark);
+  transition: background-color 0.5s ease;
+}
+
+.cell.hint {
+  background-color: var(--hint);
+  color: var(--text-dark);
+  transition: background-color 0.5s ease;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+  user-select: none;
+}
+
+button, select {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+button:hover, select:hover {
+  background: var(--highlight);
+}
+
+button:disabled {
+  background: #b2bec3;
+  cursor: not-allowed;
+}
+
+.timer {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  user-select: none;
+}
+
+@media (max-width: 600px) {
+  .sudoku-app {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+/* Thicker borders for 3x3 boxes */
+.cell:nth-child(3n) {
+  border-right: 3px solid var(--primary);
+}
+
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54),
+.cell:nth-child(n+73):nth-child(-n+81) {
+  border-bottom: 3px solid var(--primary);
+}
